@@ -33,6 +33,7 @@ class Hostendpoints {
     @PostMapping("/addsomething")
 
     fun writeSomething(@RequestBody obj: String): String {
+
         var conn: Connection? = DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/apitestapp?autoReconnect=true&useSSL=false", "root", "password"
         )
