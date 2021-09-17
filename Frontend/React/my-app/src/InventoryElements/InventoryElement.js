@@ -1,15 +1,62 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+var axios = require('axios');
 
 function InventoryElement(props) {
+  const modifyCount = (id, movement) => {
+    var data = JSON.stringify({
+      id: id,
+      movement: movement,
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3005/inventoryactions/modifycount',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        props.refreshPage();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const deleteItem = (id) => {
+    var data = JSON.stringify({
+      id: id,
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3005/inventoryactions/deleteitem',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        props.refreshPage();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   const countPlus = (id) => {
-    console.log(id);
+    modifyCount(id, '+');
   };
   const countMinus = (id) => {
-    console.log(id);
+    modifyCount(id, '-');
   };
   const itemDelete = (id) => {
-    console.log(id);
+    deleteItem(id);
   };
 
   return (

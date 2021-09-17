@@ -5,6 +5,7 @@ import java.sql.*
 import java.util.*
 
 data class inventoryListItem(val name: String, val id: Int, val count: Int)
+
 @RestController
 @CrossOrigin
 @RequestMapping("api")

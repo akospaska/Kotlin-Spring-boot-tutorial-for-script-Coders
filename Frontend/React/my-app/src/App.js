@@ -45,7 +45,6 @@ function App() {
   const [apiResult, setApiResult] = useState([]);
 
   const getInventoryList = () => {
-    console.log('asdasdasd');
     fetch('http://localhost:3005/api/getinventorylist')
       .then((response) => response.text())
       .then((result) => setApiResult(JSON.parse(result)))
@@ -53,7 +52,6 @@ function App() {
   };
 
   useEffect(() => {
-    // A böngésző API segítségével frissíti a dokumentum címét
     getInventoryList();
   }, []);
 

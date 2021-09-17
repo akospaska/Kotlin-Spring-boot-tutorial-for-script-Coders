@@ -5,7 +5,27 @@ function InputComponent(props) {
   const [inputValue, setInputValue] = useState('');
 
   const addNewElement = (newElementName) => {
-    console.log(newElementName);
+    var axios = require('axios');
+    var data = JSON.stringify({
+      name: newElementName,
+    });
+
+    var config = {
+      method: 'post',
+      url: 'http://localhost:3005/inventoryactions/createnewItem',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        props.refreshPage();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -16,7 +36,6 @@ function InputComponent(props) {
       <button
         className="ui button"
         onClick={() => {
-          props.refreshPage();
           addNewElement(inputValue);
         }}
       >
